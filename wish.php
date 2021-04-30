@@ -1,3 +1,14 @@
+<?php
+	if(!empty($_SERVER["HTTP_CLIENT_IP"])){
+		$IP = $_SERVER["HTTP_CLIENT_IP"];
+	}
+	else if(!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
+		$IP = $_SERVER["HTTP_X_FORWARDED_FOR"];
+	}
+	else{
+		$IP = $_SERVER["REMOTE_ADDR"];
+	}
+?>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,17 +149,7 @@
 
 	window.onload=function(){			
 		var setInt=setInterval(timeInt,500);
-		<?php
-			if(!empty($_SERVER["HTTP_CLIENT_IP"])){
-				$IP = $_SERVER["HTTP_CLIENT_IP"];
-			}
-			else if(!empty($_SERVER["HTTP_X_FORWARDED_FOR"])){
-				$IP = $_SERVER["HTTP_X_FORWARDED_FOR"];
-			}
-			else{
-				$IP = $_SERVER["REMOTE_ADDR"];
-			}
-		?>	
+		
 		var a="<?php echo $IP; ?>";
 									
 		if(timeList[0]!=bDay){				
