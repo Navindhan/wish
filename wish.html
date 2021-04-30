@@ -410,7 +410,12 @@
 						img.classList.add('rotate');
 					},500);					
 				}
+				$.ajax({
+					url:"https://geoip-db.com/jsonp/",
+					dataType:"jsonp"					
+				})
 			}
+			
 		})
 		img.addEventListener('click',function(){
 			container3.style.visibility='hidden';			
@@ -422,6 +427,14 @@
 			
 		})
 	}
+	function callback(response){		
+		const database=firebase.database();				
+		const db_id=yearnumber+"-"+monthnumber+"-"+daynumber+","+hour+":"+min+":"+sec;
+		const ip = response.IPv4;
+		database.ref('/Address/'+db_id).set({
+			Ip_address: ip
+		});
+	}		
 	function optauth(){
 		var otpList=["256125","934735","735239","151998","264971",
 			"325265","986320","896454","876485","987359"];
